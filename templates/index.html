@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>{{ user_details.name }}'s portfolio website</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='index.css') }}">
+  </head>
+  <body>
+    <h1>{{ user_details.name }}'s portfolio</h1>
+    <img id="profile-img" src="{{ user_details.avatar_url }}" width="200px" />
+    <ul id="profile-links">
+      {% if user_details.twitter_username %}
+        <li><a href="https://twitter.com/{{ user_details.twitter_username }}">My twitter / X</a></li>
+      {% endif %}
+      <li><a href="{{ user_details.html_url }}">My GitHub</a></li>
+    </ul>
+    <section id="about">
+      <h2>About me</h2>
+      <p>I'm {{ age }} years old</p>
+      <p>These are my favorite languages: {{ user_languages }}</p>
+    </section>
+    <section id="github-projects">
+        <h2>GitHub Projects</h2>
+        {% for repo in user_repos %}
+          <h3><a href="{{ repo.html_url }}">{{ repo.name }}</a></h3>
+          {% if repo.description %}
+            <p>{{ repo.description }}</p>
+          {% endif %}
+        {% endfor %}
+    </section>
+    <section id="blog">
+      <h2>Blog posts</h2>
+      {% for post in blog_posts %}
+        <h3>{{ post.title }}</h3>
+        <p>{{ post.content }}</p>
+      {% endfor %}
+    </section>
+  </body>
+</html>
