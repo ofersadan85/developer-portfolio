@@ -1,2 +1,2 @@
-flask
-httpx
+flask==3.0.1
+httpx==0.26.0
